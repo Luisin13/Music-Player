@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="../css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="window-control">
+      <button class="tray"></button>
+      <button class="minimize"></button>
+      <button class="close"></button>
+    </div>
+    <!--volume-->
+    <div class="volume-control invisible-volume-control">
+      <input class="volume-slider" type="range" min="0" max="100" value="100" />
+      <p class="volume-amount">100</p>
+    </div>
+    <div class="playing">
+      <!-- info -->
+      <div class="playing-info">
+        <img
+          src="../assets/images/noArtWork.jpg"
+          alt="ArtWork"
+          class="playing-artwork"
+        />
+        <div class="playing-title"></div>
+      </div>
+      <!-- controls -->
+      <div class="controls">
+        <button class="volume control-button">
+          <i class="fas fa-volume-high control-icon"></i>
+        </button>
+        <button class="prev control-button">
+          <i class="fa-solid fa-backward-step control-icon"></i>
+        </button>
+        <button class="play control-button">
+          <i class="fa-solid fa-play control-icon"></i>
+        </button>
+        <button class="next control-button">
+          <i class="fa-solid fa-forward-step control-icon"></i>
+        </button>
+        <button class="loop control-button">
+          <i class="fa-solid fa-stop control-icon"></i>
+        </button>
+      </div>
+
+      <!-- progress-bar -->
+      <div class="progress-area">
+        <div class="progress-bar">
+          <audio id="main-audio" src=""></audio>
+        </div>
+        <div class="song-timer">
+          <span class="current-time">0:00</span>
+          <span class="max-duration">0:00</span>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../js/script.js"></script>
+  </body>
+</html>

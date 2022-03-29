@@ -1,0 +1,295 @@
+body {
+  --blue: #8bb1c2;
+  --bitdarkerblue: #6098aa;
+  --lightblack: #515c6f;
+  --white: #ffffff;
+  --red: #ff5b57;
+  --yellow: #f7c944;
+  --green: #00b894;
+  --lightgray: #a3a3a3;
+}
+
+.window-control {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+  height: 30px;
+  background-color: #1b1b1b;
+}
+
+.window-control button {
+  border: none;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.window-control button:hover {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.window-control .close {
+  background-color: var(--red);
+}
+
+.window-control .minimize {
+  background-color: var(--yellow);
+}
+
+.window-control .tray {
+  background-color: var(--green);
+}
+
+.playing {
+  background: #1b1b1b;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10%;
+}
+
+.progress-area {
+  position: absolute;
+  top: 50%;
+  left: calc(50% - 30%);
+  height: 6px;
+  width: 60%;
+  border-radius: 50px;
+  background: #f0f0f0;
+  color: var(--white);
+  cursor: pointer;
+}
+
+.progress-area .progress-bar {
+  height: inherit;
+  width: 0%;
+  position: relative;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--bitdarkerblue) 100%);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  top: 50%;
+  right: -5px;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  background: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.progress-area:hover .progress-bar::before {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.progress-area .song-timer {
+  margin-top: 2px;
+  position: relative;
+  z-index: 1;
+  font-size: 12px;
+  color: var(--white);
+  text-align: center;
+  left: 50%;
+}
+
+.progress-area .song-timer .current-time {
+  position: absolute;
+  left: -50%;
+}
+
+.progress-area .song-timer .max-duration {
+  position: absolute;
+  right: 50%;
+}
+
+.song-timer span {
+  font-size: 13px;
+  color: linear-gradient(90deg, var(--white) 0%, var(--lightblack) 100%);
+}
+
+.controls {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  margin-right: calc(-50% + 50px);
+  padding: 0 10px;
+}
+
+.control-button {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.volume {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prev {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.next {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loop {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-icon {
+  font-size: 30px;
+  color: var(--white);
+}
+
+.prev .control-icon,
+.loop .control-icon,
+.volume .control-icon,
+.next .control-icon {
+  font-size: 20px;
+}
+
+.playing-info {
+  position: absolute;
+  display: flex;
+  width: 250px;
+  height: 100%;
+  left: 0;
+  top: 0;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.playing-info .playing-title {
+  position: relative;
+  color: var(--white);
+  top: calc(50% - 15px);
+  text-align: left;
+  margin-left: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: calc(100% - 10px);
+  width: calc(100% - 80px);
+  font-size: calc(100vw / 100vh * 20px);
+  line-height: 100%;
+}
+
+.playing-info .playing-artist {
+  position: relative;
+  left: -4.9vw;
+  top: 50%;
+  color: var(--lightgray);
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.playing-info .playing-artwork {
+  position: relative;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.volume-control {
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  width: 20px;
+  height: 170px;
+  right: 8.3%;
+  bottom: 11%;
+  background-color: #1b1b1b;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  margin-right: 50px;
+  padding: 0 10px;
+}
+
+.volume-slider {
+  position: absolute;
+  bottom: 65px;
+  transform: rotate(-90deg);
+  opacity: 1;
+  color: var(--blue);
+  background-color: var(--blue);
+}
+
+
+.volume-amount {
+  position: absolute;
+  top: 1px;
+  color: var(--white);
+  font-size: 12px;
+}
+
+.invisible-volume-control {
+  transition: visibility 0.2s ease;
+  visibility: hidden;
+}

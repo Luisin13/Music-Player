@@ -43,13 +43,13 @@ module.exports = (start, extension) => {
               title: metadata.title,
               artist: metadata.artist || "Unknown",
               album: metadata.album || "Unknown",
+              number: metadata.track ? Number(metadata.track) : 0,
               path: `${sgPath.join("\\")}.${extension}`,
             };
             const plObj = {
               title: metadata.album || "Unknown",
               tracks: [],
             };
-
             if (!pls.find((pl) => pl.title === plObj.title)) {
               return pls.push(plObj);
             } else {
@@ -64,8 +64,7 @@ module.exports = (start, extension) => {
   }
 
   search(start, extension);
-
-  //wait until pls is populated
+  
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve(pls);

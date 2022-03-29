@@ -1,0 +1,95 @@
+body {
+  --blue: #8bb1c2;
+  --bitdarkerblue: #6098aa;
+  --lightblack: #515c6f;
+  --white: #ffffff;
+  --red: #ff5b57;
+  --yellow: #f7c944;
+  --green: #00b894;
+  --lightgray: #a3a3a3;
+}
+
+.controls {
+  background-color: #1b1b1b;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  bottom: 0;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.control-button {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.volume {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prev {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.next {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loop {
+  border-radius: 50%;
+  background-color: var(--blue);
+  border: none;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-icon {
+  font-size: 20px;
+  color: var(--white);
+}
+
+.prev .control-icon,
+.loop .control-icon,
+.volume .control-icon,
+.next .control-icon {
+  font-size: 15px;
+}

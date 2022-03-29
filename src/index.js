@@ -1,12 +1,19 @@
-const { app, BrowserWindow, ipcRenderer, ipcMain } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcRenderer,
+  ipcMain,
+  webContents,
+  Tray,
+  Menu,
+} = require("electron");
 const { setFfmpegPath, read: ffmetaRead } = require("ffmetadata");
 const pathToFfmpeg = require("ffmpeg-static");
 const { readdirSync, statSync } = require("fs");
 const { homedir } = require("os");
 const path = require("path");
-const { URL } = require("url");
 const recursiveReadDir = require("./util/recursiveReadDir");
-
+let window = null;
 setFfmpegPath(pathToFfmpeg);
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -20,6 +27,9 @@ const createWindow = async () => {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    resizable: false,
+    enableLargerThanScreen: false,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -29,20 +39,27 @@ const createWindow = async () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "index.html"));
+  mainWindow.loadFile(path.join(__dirname, "app", "html", "index.html"));
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
 
   //send folders to renderer
 
-  mainWindow.webContents.on("did-finish-load", async() => {
+  mainWindow.webContents.on("did-finish-load", async () => {
     // const folders = readdirSync(new URL(`${homedir()}/Music`).pathname);
-    const playlists = await recursiveReadDir(new URL(`${homedir()}/Music`).pathname, "mp3")
-    console.log(playlists[playlists.findIndex((pl) => pl.title === "Unknown")])
+    const playlists = await recursiveReadDir(
+      new URL(`${homedir()}/Music`).pathname,
+      "mp3"
+    );
+    for (let i = 0; i < playlists.length; i++) {
+      const pl = playlists[i];
+      pl.tracks.sort((a, b) => a.number - b.number);
+    }
     mainWindow.webContents.send("folder", playlists);
   });
-  // mainWindow.webContents.send("folder", readdirSync(`${homedir()}/Music`).join(', '));
+  mainWindow.maximize();
+  window = mainWindow
 };
 
 // This method will be called when Electron has finished
@@ -69,3 +86,31 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+//Window control commands
+ipcMain.on("close-window", () => {
+  app.quit();
+});
+
+ipcMain.on("minimize-window", () => {
+  BrowserWindow.getFocusedWindow().minimize();
+});
+
+ipcMain.on("tray-window", () => {
+  BrowserWindow.getFocusedWindow().hide();
+});
+
+let tray = null;
+app.whenReady().then(() => {
+  tray = new Tray(
+    new URL(`${__dirname}\\app\\assets\\images\\testeIco.png`).pathname
+  );
+  tray.on('click', () => {
+    new BrowserWindow({
+      width: 400,
+      height: 600,
+      resizable: false,
+      frame: false,
+    }).loadFile(path.join(__dirname, "app", "html", "tray.html"));
+  })
+});
