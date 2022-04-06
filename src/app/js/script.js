@@ -1,9 +1,9 @@
 const electron = require("electron");
 const progressArea = document.querySelector(".progress-area"),
   progressBar = progressArea.querySelector(".progress-bar"),
-  audio = new Audio(),
   musicCurrentTime = progressArea.querySelector(".current-time"),
   musicDuration = progressArea.querySelector(".max-duration"),
+  audio = document.querySelector(".audio"),
   controls = document.querySelector(".controls"),
   playBtn = controls.querySelector(".play"),
   nextBtn = controls.querySelector(".next"),
@@ -14,7 +14,6 @@ const progressArea = document.querySelector(".progress-area"),
   volumeAmount = volumeControl.querySelector(".volume-amount"),
   volumeSlider = volumeControl.querySelector(".volume-slider"),
   windowControl = document.querySelector(".window-control"),
-  trayBtn = windowControl.querySelector(".tray"),
   minimizeBtn = windowControl.querySelector(".minimize"),
   closeBtn = windowControl.querySelector(".close"),
   playingInfo = document.querySelector(".playing-info"),
@@ -24,6 +23,7 @@ const progressArea = document.querySelector(".progress-area"),
   ipcRenderer = electron.ipcRenderer;
 
 let curTrack = 0,
+  curPlaylist = null,
   playlists = [],
   loopMode = "none",
   hoveringVolumeBtn = false;
@@ -37,13 +37,6 @@ minimizeBtn.addEventListener("click", (e) => {
   e.preventDefault();
   ipcRenderer.send("minimize-window");
 });
-
-trayBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  ipcRenderer.send("tray-window");
-});
-
-ipcRenderer.on("tray-window-play/pause", playAudio);
 
 ipcRenderer.on("folder", (event, rcvPlaylists) => {
   playlists = rcvPlaylists;

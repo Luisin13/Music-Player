@@ -7,14 +7,12 @@ const {
   Tray,
   Menu,
 } = require("electron");
-const { setFfmpegPath, read: ffmetaRead } = require("ffmetadata");
-const pathToFfmpeg = require("ffmpeg-static");
-const { readdirSync, statSync } = require("fs");
 const { homedir } = require("os");
 const path = require("path");
 const recursiveReadDir = require("./util/recursiveReadDir");
-let window = null;
-setFfmpegPath(pathToFfmpeg);
+let window = null,
+  tray = null,
+  trayWindow = null;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -59,7 +57,7 @@ const createWindow = async () => {
     mainWindow.webContents.send("folder", playlists);
   });
   mainWindow.maximize();
-  window = mainWindow
+  window = mainWindow;
 };
 
 // This method will be called when Electron has finished
@@ -98,19 +96,4 @@ ipcMain.on("minimize-window", () => {
 
 ipcMain.on("tray-window", () => {
   BrowserWindow.getFocusedWindow().hide();
-});
-
-let tray = null;
-app.whenReady().then(() => {
-  tray = new Tray(
-    new URL(`${__dirname}\\app\\assets\\images\\testeIco.png`).pathname
-  );
-  tray.on('click', () => {
-    new BrowserWindow({
-      width: 400,
-      height: 600,
-      resizable: false,
-      frame: false,
-    }).loadFile(path.join(__dirname, "app", "html", "tray.html"));
-  })
 });

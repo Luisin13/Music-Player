@@ -15,9 +15,18 @@
   </head>
   <body>
     <div class="window-control">
-      <button class="tray"></button>
       <button class="minimize"></button>
       <button class="close"></button>
+    </div>
+    <div class="playlist-list">
+      <div class="playlist-card">
+        <img
+          src="../assets/images/noArtWork.jpg"
+          alt="ArtWork"
+          class="playlist-image"
+        />
+        <div class="playlist-title">Teste</div>
+      </div>
     </div>
     <!--volume-->
     <div class="volume-control invisible-volume-control">
@@ -56,7 +65,7 @@
       <!-- progress-bar -->
       <div class="progress-area">
         <div class="progress-bar">
-          <audio id="main-audio" src=""></audio>
+          <audio class="audio"></audio>
         </div>
         <div class="song-timer">
           <span class="current-time">0:00</span>

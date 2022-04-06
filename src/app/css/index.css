@@ -1,12 +1,14 @@
 body {
   --blue: #8bb1c2;
   --bitdarkerblue: #6098aa;
+  --black: #1b1b1b;
   --lightblack: #515c6f;
   --white: #ffffff;
   --red: #ff5b57;
   --yellow: #f7c944;
   --green: #00b894;
   --lightgray: #a3a3a3;
+  --lighterblack: #2d3436;
 }
 
 .window-control {
@@ -20,7 +22,7 @@ body {
   align-items: center;
   width: 100%;
   height: 30px;
-  background-color: #1b1b1b;
+  background-color: var(--black);
 }
 
 .window-control button {
@@ -49,7 +51,7 @@ body {
 }
 
 .playing {
-  background: #1b1b1b;
+  background: var(--black);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -256,7 +258,7 @@ body {
 }
 
 .volume-control {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -264,7 +266,7 @@ body {
   height: 170px;
   right: 8.3%;
   bottom: 11%;
-  background-color: #1b1b1b;
+  background-color: var(--black);
   border-radius: 5px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   margin: 0 auto;
@@ -281,7 +283,6 @@ body {
   background-color: var(--blue);
 }
 
-
 .volume-amount {
   position: absolute;
   top: 1px;
@@ -292,4 +293,48 @@ body {
 .invisible-volume-control {
   transition: visibility 0.2s ease;
   visibility: hidden;
+}
+
+.playlist-list {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--lighterblack);
+  color: var(--white);
+  font-size: calc(100vw / 100vh * 20px);
+  line-height: 100%;
+  padding: 0 10px;
+  /* overflow-y: hidden;
+  overflow-x: auto; */
+  overflow: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar: none;
+}
+
+.playlist-card {
+  width: 180px;
+  height: 300px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  background-color: #1b1b1b;
+}
+
+.playlist-image {
+  position: relative;
+  left: 50%;
+  top: 10px;
+  transform: translate(-50%, 0);
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+  background-color: var(--black);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
